@@ -24,6 +24,7 @@ const Game = () => {
     }
     const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
     const [xIsNext, setXIsNext] = useState(true);
+    const [stepNumber, setStepNumber] = useState(0)
     const handleClick = (i) => {
         const _history = history;
         const current = _history[_history.length - 1];
@@ -34,9 +35,13 @@ const Game = () => {
         squares[i] = xIsNext ? "X" : "O";
 
         setHistory(_history.concat([{ squares: squares }]));
+        setStepNumber(_history.length)
         setXIsNext(!xIsNext);
     };
-
+    const jumpTo = (step) => {
+        setStepNumber(step)
+        setXIsNext(step % 2 === 0)
+    }
     const _history = history;
     const current = _history[_history.length - 1];
     const winner = calculateWinner(current.squares);
@@ -46,6 +51,17 @@ const Game = () => {
     } else {
         status = "Next player: " + (xIsNext ? "X" : "O");
     }
+    const moves = history.map((step, move) => {
+        //step:squareの状態
+        //move:手番
+        //desc:description
+        const desc = move ? "Go to move #" + move : "Go to game start"
+        return (
+            <li key={move}>
+                <button onClick={() => jumpTo(move)}>{desc}</button>
+            </li>
+        )
+    })
 
     return (
         <div className="game">
@@ -54,7 +70,7 @@ const Game = () => {
             </div>
             <div className="game-info">
                 <div>{status}</div>
-                <ol>{/* TODO */}</ol>
+                <ol>{moves}</ol>
             </div>
         </div>
     );
