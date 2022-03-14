@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Square from "./Square";
 
 
-const Board = ({ squares, onClick }) => {
+const Board = (props) => {
     const [xIsNext, setXIsNext] = useState(true)
     const calculateWinner = (squares) => {
         const lines = [
@@ -25,10 +25,10 @@ const Board = ({ squares, onClick }) => {
     }
 
     const renderSquare = (i) => {
-        return <Square value={squares[i]} onClick={() => onClick(i)} />;
+        return <Square value={props.squares[i]} onClick={() => props.onClick(i)} />;
     };
 
-    const winner = calculateWinner(squares)
+    const winner = calculateWinner(props.squares)
     let status;
     if (winner) {
         status = `Winner:${winner}`

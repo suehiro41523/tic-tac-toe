@@ -26,14 +26,13 @@ const Game = () => {
     const [xIsNext, setXIsNext] = useState(true);
     const [stepNumber, setStepNumber] = useState(0)
     const handleClick = (i) => {
-        const _history = history;
+        const _history = history.slice(0, stepNumber + 1);
         const current = _history[_history.length - 1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
         squares[i] = xIsNext ? "X" : "O";
-
         setHistory(_history.concat([{ squares: squares }]));
         setStepNumber(_history.length)
         setXIsNext(!xIsNext);
@@ -43,7 +42,7 @@ const Game = () => {
         setXIsNext(step % 2 === 0)
     }
     const _history = history;
-    const current = _history[_history.length - 1];
+    const current = _history[stepNumber];
     const winner = calculateWinner(current.squares);
     let status;
     if (winner) {
