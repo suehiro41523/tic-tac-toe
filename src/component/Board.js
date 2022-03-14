@@ -3,19 +3,7 @@ import Square from "./Square";
 
 
 const Board = ({ squares, onClick }) => {
-    // const [squares, setSquares] = useState(Array(9).fill(null))
     const [xIsNext, setXIsNext] = useState(true)
-
-    // const handleClick = (i) => {
-    //     const _squares = squares.slice()
-    //     if (calculateWinner(_squares) || _squares[i]) {
-    //         return
-    //     }
-    //     _squares[i] = xIsNext ? "X" : "O"
-    //     setSquares(_squares)
-    //     setXIsNext(!xIsNext)
-    // }
-
     const calculateWinner = (squares) => {
         const lines = [
             [0, 1, 2],
