@@ -3,6 +3,7 @@ import Square from "./Square";
 
 
 const Board = (props) => {
+    // eslint-disable-next-line
     const [xIsNext, setXIsNext] = useState(true)
     const calculateWinner = (squares) => {
         const lines = [
